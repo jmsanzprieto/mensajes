@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<Menu :OpenCloseForm="OpenCloseForm" :showForm="showForm"/>
+<div class="container">
+   <MensajeForm :showForm="showForm" />
+   <ListaMensajes />
+</div>
+
+
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// Importamos el menu superior
+import Menu from "./components/Menu";
+import MensajeForm from "./components/MensajeForm";
+import useFormMensajes from './hook/UseFormMensajes';
+import ListaMensajes from './components/ListaMensajes';
+
+
 
 export default {
+ 
   name: 'App',
+
   components: {
-    HelloWorld
+    Menu,
+    MensajeForm,
+    ListaMensajes,
+
+  },
+
+  setup(){
+    return {
+      ...useFormMensajes(),
+    }
+    
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
+.container{width: 80%;}
 </style>
