@@ -1,42 +1,45 @@
 <template>
-<Menu :OpenCloseForm="OpenCloseForm" :showForm="showForm"/>
-<div class="container">
-   <MensajeForm :showForm="showForm" />
-   <ListaMensajes />
-</div>
-
-
-
+  <div>
+    <Menu :OpenCloseForm="OpenCloseForm" :showForm="showForm" />
+    <div class="container">
+      <MensajeForm :showForm="formProps" :openCloseForm="OpenCloseForm" />
+      <ListaMensajes />
+    </div>
+  </div>
 </template>
 
 <script>
-// Importamos el menu superior
 import Menu from "./components/Menu";
 import MensajeForm from "./components/MensajeForm";
-import useFormMensajes from './hook/UseFormMensajes';
-import ListaMensajes from './components/ListaMensajes';
-
-
+import ListaMensajes from "./components/ListaMensajes";
 
 export default {
- 
-  name: 'App',
-
   components: {
     Menu,
     MensajeForm,
     ListaMensajes,
-
   },
-
-  setup(){
+  data() {
     return {
-      ...useFormMensajes(),
-    }
-    
-  }
-}
+      showForm: {
+        isTrusted: false,
+      },
+    };
+  },
+  methods: {
+    OpenCloseForm(value) {
+      this.showForm.isTrusted = value;
+    },
+  },
+  computed: {
+    formProps() {
+      return { ...this.showForm };
+    },
+  },
+};
 </script>
+
+
 
 <style lang="scss" scoped>
 .container{width: 80%;}

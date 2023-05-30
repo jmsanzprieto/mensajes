@@ -17,6 +17,7 @@ export default createStore({
     MostrarMensajes(state,payload){
       state.mensajes = payload;
     },
+
     SetSuccessMessage(state, message) {
       state.successMessage = message;
     },
@@ -39,25 +40,9 @@ export default createStore({
         // construimos el JSON que se recibe
         const result = await response.json();
 
+        console.log(result);
+
         commit("MostrarMensajes",result.data.mensajes.reverse());
-      
-      
-        // if(!params?.total){ // la sintaxis significa: si params.total no existe. !negacion -> ? interrogacion
-        //   // llamamos al mutations
-        //   commit("MostrarPaises",result.data.paises);
-
-        //   if(params?.orden){
-        //     commit("MostrarPaises",result.data.paises.reverse());
-        //  }
-      //   }else{
-      //     const resultTemp = [];
-      //     result.data.mensajes.forEach((mensaje,index) => {
-      //       if(index < params.total) resultTemp.push(mensaje);
-      //     });
-
-      //     commit("MostrarMensajes", resultTemp);
-      //  }
-      
 
       } catch (error) {
         // cargamos en consola si hay algun error
@@ -68,7 +53,7 @@ export default createStore({
     // Guardar datos a través de la API
     async EnviarDatos({ commit }, formData) {
       try {
-        const response = await fetch("http://josemanuelsanz.es/api_mensajes/index.php", {
+        const response = await fetch("https://josemanuelsanz.es/api_mensajes/index.php", {
           method: "POST",
           body: JSON.stringify(formData),
         });
@@ -77,14 +62,40 @@ export default createStore({
   
         // Realizar las acciones necesarias con la respuesta de la API
         commit("SetSuccessMessage", "Se ha guardado el mensaje");
- 
+           
   
       } catch (error) {
         commit("SetErrorMessage", "Error al guardar el mensaje");
         console.log(error);
       }
-    }
+    },
+  
+
+      // Guardar datos a través de la API
+      async EnviarDatosRespuesta({ commit }, formDataRespuesta) {
+        try {
+          const response = await fetch("https://josemanuelsanz.es/api_mensajes/respuestas.php", {
+            method: "POST",
+            body: JSON.stringify(formDataRespuesta),
+          });
+      
+          const result = await response.json();
+    
+          // Realizar las acciones necesarias con la respuesta de la API
+          commit("SetSuccessMessage", "Se ha guardado el mensaje");
+          console.log(result);
+             
+    
+        } catch (error) {
+          commit("SetErrorMessage", "Error al guardar el mensaje");
+          console.log(error);
+        }
+      },
+
   },
+    
+
+  
   modules: {
   }
 })

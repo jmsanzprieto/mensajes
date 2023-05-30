@@ -5,7 +5,10 @@ export default function useFormMensajes() {
 
     const OpenCloseForm = () => {
         showForm.value = !showForm.value; // Damos el valor contrario al que existe en showForm
-    }
+
+
+    };
+
 
     return{
         showForm, 

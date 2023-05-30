@@ -17,7 +17,6 @@
 import {onMounted, computed, ref} from "vue";
 // Importamos lo necesario para poder manejar el store
 import {useStore} from "vuex";
-
 // Importamos el componente paa ver el mensaje concreto
 import Mensaje from "./Mensaje";
 
@@ -34,7 +33,7 @@ export default {
             setTimeout(() => {
             this.$store.commit("ClearSuccessMessage");
             this.$store.dispatch("CargarMensajes");// Recargar la lista de países
-            }, 3000); // Ocultar el mensaje después de 3 segundos (ajusta el tiempo según tus necesidades)
+            }, 2000); // Ocultar el mensaje después de 3 segundos (ajusta el tiempo según tus necesidades)
         }
         },
     },

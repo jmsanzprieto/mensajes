@@ -1,9 +1,9 @@
 <template>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container">
-        <span class="navbar-brand">Tablón de mensajes</span>
+        <a href="#"><span class="navbar-brand">Tablón de mensajes</span></a>
         <button class="btn btn-success pl-4 pr-4" 
-         :class="{'btn-success': !showForm, 'btn-danger': showForm}"
+         :class="{'btn-success': !showForm.isTrusted, 'btn-danger': showForm.isTrusted}"
          @click="OpenCloseForm">Crear mensaje</button>
     </div>
 </nav>
@@ -12,7 +12,7 @@
 <script>
 export default {
     props:{
-        showForm: Boolean,
+        showForm: Object,
         OpenCloseForm: Function,
     },
 }
